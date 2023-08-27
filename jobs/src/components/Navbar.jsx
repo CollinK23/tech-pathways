@@ -1,14 +1,59 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../constants/logo.png";
+import { GoogleLogin } from "@react-oauth/google"; // Update import
+import { useDispatch } from "react-redux";
+import jwt_decode from "jwt-decode";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, []);
+
+  const handleGoogleLoginSuccess = async (response) => {
+    const decoded = jwt_decode(response.credential);
+
+    const user = {
+      _id: decoded.sub,
+      _type: "user",
+      userName: decoded.name,
+      image: decoded.picture,
+    };
+    const result = user;
+
+    try {
+      dispatch({ type: "AUTH", data: { result } });
+      navigate("/dashboard");
+      setShowDropdown(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGoogleLoginError = () => {
+    console.log("Google login error");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("profile");
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+    setUser(null);
+
+    setShowDropdown(false);
+  };
+
   return (
-    <nav className=" h-[50px] z-10 relative">
+    <nav className="h-[50px] z-10 relative">
       <div className="max-w-[1300px] py-8 mx-auto flex items-center justify-between">
         <div className="font-semibold text-white text-[1.5em]">
           <Link to="/" className="flex flex-row">
-            <img src={logo} className="w-[40px] mr-2"></img>
+            <img src={logo} className="w-[40px] mr-2" alt="Logo" />
             TechPathways
           </Link>
         </div>
@@ -23,9 +68,45 @@ const Navbar = () => {
           <Link to="/newgrad" className="nav__text">
             New Grad
           </Link>
+          <a href="/dashboard" className="nav__text">
+            Dashboard
+          </a>
         </div>
 
-        {/* <button className="btn__gradient px-4 py-2 rounded-md">Button</button> */}
+        <div>
+          {user ? (
+            <div
+              className="flex flex-row items-center space-x-2 btn__gradient2 rounded-md cursor-pointer"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <img
+                className="w-[30px] h-[30px] object-cover rounded-full"
+                src={user.result.image}
+                alt={user.result.name}
+              />
+              <div className="text-white font-medium">
+                {user.result.userName}
+              </div>
+            </div>
+          ) : (
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={handleGoogleLoginError}
+              cookiePolicy="single_host_origin"
+            />
+          )}
+        </div>
+
+        {showDropdown && user && (
+          <div className="absolute top-[calc(100%+10px)] right-0 bg-white shadow-md rounded-md mt-2">
+            <button
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              onClick={handleLogout}
+            >
+              Log Out
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );

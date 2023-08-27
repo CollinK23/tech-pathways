@@ -140,16 +140,57 @@
 }
 
 .btn__gradient {
-  padding: 12px 30px;
+  width: 42.5%;
+  padding: 10px 20px;
   color: white;
+  text-align: center;
   background: linear-gradient(90deg, #4295f1 0%, #307bd1 100%);
   transition: 0.3s ease-in-out;
-  font-weight: 600;
+  font-weight: 500;
   box-shadow: 0px 23px 30px -12px rgba(62, 136, 222, 0.3);
   -webkit-box-shadow: 0px 23px 30px -12px rgba(62, 136, 222, 0.3);
 }
 
+.white__btn {
+  padding: 10px 20px;
+  background: white;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+.white__btn:hover {
+  background: #dcdcdc;
+}
+
 .btn__gradient:hover {
+  background: linear-gradient(90deg, #3e88de 0%, #2b6ebb 100%);
+}
+.btn__gradient2 {
+  width: 200px;
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(90deg, #4295f1 0%, #307bd1 100%);
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  box-shadow: 0px 23px 30px -12px rgba(62, 136, 222, 0.3);
+  -webkit-box-shadow: 0px 23px 30px -12px rgba(62, 136, 222, 0.3);
+}
+
+.white__btn2 {
+  width: 200px;
+  text-align: center;
+  padding: 10px 20px;
+  background: white;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+.white__btn2:hover {
+  background: #dcdcdc;
+}
+
+.btn__gradient2:hover {
   background: linear-gradient(90deg, #3e88de 0%, #2b6ebb 100%);
 }
 
@@ -180,4 +221,21 @@
 .shadow {
   box-shadow: 0px 23px 30px -12px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 23px 30px -12px rgba(0, 0, 0, 0.3);
+}
+
+.nav__btn {
+  background: transparent;
+  transition: 0.3s ease-in-out;
+}
+
+.nav__btn:hover {
+  background: linear-gradient(-90deg, #2b6ebb47, #1a1a1a);
+}
+
+.nav__btn__no__hover {
+  background: linear-gradient(-90deg, #2b6ebb, #1a1a1a);
+}
+
+.season__btn {
+  background: #383838;
 }

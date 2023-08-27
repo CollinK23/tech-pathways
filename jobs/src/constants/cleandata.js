@@ -67,3 +67,11 @@ export function convertDateFormat(inputDate) {
 
   return formattedDate;
 }
+
+export const extractLocation = (text) => {
+  const regexTags = /<[^>]+>|<\/[^>]+>/g;
+  const regexLineBreaks = /<br\s*\/?>|<\/br>/gi;
+  const removedTags = text.replace(regexLineBreaks, ", ");
+  const result = removedTags.replace(regexTags, "");
+  return result;
+};
