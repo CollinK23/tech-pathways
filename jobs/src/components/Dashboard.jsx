@@ -33,7 +33,7 @@ const Dashboard = () => {
     },
   ];
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   return (
     <div className="flex flex-row">

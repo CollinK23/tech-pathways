@@ -5,7 +5,6 @@ const jobAppSchema = mongoose.Schema({
   company: String,
   location: String,
   jobTitle: String,
-  process: String,
   season: String,
   dateApplied: Date,
   dateScreen: Date,

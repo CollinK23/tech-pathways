@@ -1,14 +1,32 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import DashNav from "./DashNav";
 import AppProgress from "./AppProgress";
-import { useSelector } from "react-redux";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { fetchApps } from "../api";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const Applications = () => {
-  const jsonData = useSelector((state) => state.posts);
-
-  console.log(jsonData);
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [filterBy, setFilterBy] = useState("all");
+  const [searchName, setSearchName] = useState("");
+  const debouncedSearch = useDebounce(searchName, 500);
+
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+    [debouncedSearch],
+    async ({ pageParam = 1 }) => {
+      const response = await fetchApps(user._id, pageParam - 1, searchName);
+      return response;
+    },
+    {
+      getNextPageParam: (_, pages) => {
+        return pages.length + 1;
+      },
+      initialData: {
+        pages: [],
+        pageParams: [1],
+      },
+    }
+  );
 
   const handleFilterChange = (event) => {
     const selectedFilter = event.target.value;
@@ -26,10 +44,7 @@ const Applications = () => {
     setJsonData(filteredData);
   };
 
-  const [searchName, setSearchName] = useState("");
-  return jsonData === null ? (
-    <DashNav selected={"Applications"}></DashNav>
-  ) : (
+  return (
     <div className="flex flex-row">
       <DashNav selected={"Applications"}></DashNav>
       <div className="mx-auto mt-12 p-12 w-[1300px]">
@@ -61,14 +76,18 @@ const Applications = () => {
           </div>
         </div>
         <div className="w-[100%] flex flex-col my-4 gap-4">
-          {jsonData.map((job, index) =>
-            job.company.toLowerCase().includes(searchName.toLowerCase()) ||
-            job.jobTitle.toLowerCase().includes(searchName.toLowerCase()) ||
-            (job.location.toLowerCase().includes(searchName.toLowerCase()) &&
-              job.season.toLowerCase().includes(filterBy.toLowerCase())) ? (
+          {data.pages.map((page, pageIndex) =>
+            page.data.map((job, index) => (
               <AppProgress key={index} stats={job} />
-            ) : null
+            ))
           )}
+          <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+            {isFetchingNextPage
+              ? "Loading More..."
+              : (data.pages.length ?? 0) < 3
+              ? "Load More"
+              : "noting more to load"}
+          </button>
         </div>
       </div>
     </div>

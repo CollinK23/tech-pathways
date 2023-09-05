@@ -2,41 +2,55 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../constants/logo.png";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { useDispatch, useSelector } from "react-redux";
 
 const DashNav = ({ selected }) => {
-  const [expanded, setExpanded] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(
+    useSelector((state) => state.expand.expanded)
+  );
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, []);
-  const navigate = useNavigate();
 
   const toggleExpanded = () => {
+    if (expanded) {
+      dispatch({ type: "CLOSE" });
+    } else {
+      dispatch({ type: "EXPAND" });
+    }
     setExpanded(!expanded);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setExpanded(true);
-      } else {
-        setExpanded(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth >= 768) {
+  //       dispatch({ type: "EXPAND" });
+  //     } else {
+  //       dispatch({ type: "CLOSE" });
+  //     }
+  //     setExpanded(!expanded);
+  //   };
 
-    handleResize();
+  //   handleResize();
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
-  if (!user) {
+  const handleLogout = () => {
+    localStorage.removeItem("profile");
+    dispatch({ type: "LOGOUT" });
     navigate("/");
-  }
+    setUser(null);
+  };
   return (
     <div>
       <div
@@ -90,6 +104,13 @@ const DashNav = ({ selected }) => {
             {expanded ? "Applications" : ""}
           </div>
         </Link>
+        <div
+          className={`w-[100%] text-white  text-[16px] p-2 cursor-pointer nav__btn`}
+          onClick={handleLogout}
+        >
+          <i className="fa-solid fa-arrow-right-from-bracket m-4"></i>
+          {expanded ? "Sign Out" : ""}
+        </div>
         <div className="hidden sm:flex justify-center items-end h-[60px] text-white">
           <div onClick={toggleExpanded} className="cursor-pointer">
             {expanded ? (
@@ -113,20 +134,22 @@ const DashNav = ({ selected }) => {
             : `bg-primary h-full w-[70px] top-0`
         }
       ></div>
+
       <div
         className={
           expanded
             ? "flex flex-row items-center space-x-2 rounded-md bg-primary w-[250px] bottom-0 p-4 fixed"
             : "flex flex-row items-center space-x-2 rounded-md bg-primary w-[70px] bottom-0 p-4 fixed"
         }
+        onClick={() => setShowDropdown(!showDropdown)}
       >
         <img
           className="w-[36px] h-[36px] object-cover rounded-full"
-          src={user.result.image}
-          alt={user.result.name}
+          src={user.avatar}
+          alt={user.name}
         />
         {expanded ? (
-          <div className="text-white font-medium">{user.result.userName}</div>
+          <div className="text-white font-medium">{user.name}</div>
         ) : null}
       </div>
     </div>

@@ -11,17 +11,11 @@ import {
 } from "./components";
 import { Route, Routes, useParams, useLocation } from "react-router-dom";
 import "./App.css";
-import { useDispatch } from "react-redux";
-import { getApps } from "./actions/posts";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import PrivateRoute from "./privateRoute/PrivateRoute";
 
 const App = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
-
-  useEffect(() => {
-    dispatch(getApps());
-  }, [dispatch]);
 
   const nonNavbarRoutes = ["/dashboard", "/internships", "/applications"];
   const shouldRenderNavbar = !nonNavbarRoutes.includes(location.pathname);
@@ -35,9 +29,30 @@ const App = () => {
         <Route path="/summer" element={<Summer />} />
         <Route path="/offseason" element={<Offseason />} />
         <Route path="/newgrad" element={<Newgrad />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/internships" element={<Internships />} />
-        <Route path="/applications" element={<Applications />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/internships"
+          element={
+            <PrivateRoute>
+              <Internships />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/applications"
+          element={
+            <PrivateRoute>
+              <Applications />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </GoogleOAuthProvider>
   );

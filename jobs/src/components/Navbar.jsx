@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../constants/logo.png";
-import { GoogleLogin } from "@react-oauth/google"; // Update import
+import { GoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import jwt_decode from "jwt-decode";
+import { getUser } from "../actions/posts";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,15 +20,13 @@ const Navbar = () => {
     const decoded = jwt_decode(response.credential);
 
     const user = {
-      _id: decoded.sub,
-      _type: "user",
-      userName: decoded.name,
-      image: decoded.picture,
+      name: decoded.name,
+      email: decoded.email,
+      avatar: decoded.picture,
     };
-    const result = user;
 
     try {
-      dispatch({ type: "AUTH", data: { result } });
+      await dispatch(getUser(user));
       navigate("/dashboard");
       setShowDropdown(true);
     } catch (error) {
@@ -68,9 +67,11 @@ const Navbar = () => {
           <Link to="/newgrad" className="nav__text">
             New Grad
           </Link>
-          <a href="/dashboard" className="nav__text">
-            Dashboard
-          </a>
+          {user ? (
+            <a href="/dashboard" className="nav__text">
+              Dashboard
+            </a>
+          ) : null}
         </div>
 
         <div>
@@ -81,12 +82,10 @@ const Navbar = () => {
             >
               <img
                 className="w-[30px] h-[30px] object-cover rounded-full"
-                src={user.result.image}
-                alt={user.result.name}
+                src={user.avatar}
+                alt={user.name}
               />
-              <div className="text-white font-medium">
-                {user.result.userName}
-              </div>
+              <div className="text-white font-medium">{user.name}</div>
             </div>
           ) : (
             <GoogleLogin

@@ -5,7 +5,7 @@ import { createApp } from "../actions/posts";
 
 const UpdatedJob = ({ stats, id }) => {
   const appData = {
-    userId: id,
+    user: id,
     company: stats.company,
     location: stats.location,
     jobTitle: stats.role,
@@ -25,7 +25,6 @@ const UpdatedJob = ({ stats, id }) => {
     e.preventDefault();
 
     dispatch(createApp(appData));
-    console.log("Form submitted with predefined data");
   };
   return (
     <div className="bg-primary w-full rounded-md p-4 flex items-center justify-between">

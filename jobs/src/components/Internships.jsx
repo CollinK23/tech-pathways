@@ -159,7 +159,7 @@ const Jobs = () => {
             job.role.toLowerCase().includes(searchName.toLowerCase()) ||
             (job.location.toLowerCase().includes(searchName.toLowerCase()) &&
               job.season.toLowerCase().includes(filterBy.toLowerCase())) ? (
-              <UpdatedJob key={index} stats={job} id={user.profile._id} />
+              <UpdatedJob key={index} stats={job} id={user._id} />
             ) : null
           )}
         </div>
