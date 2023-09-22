@@ -140,7 +140,6 @@
 }
 
 .btn__gradient {
-  width: 42.5%;
   padding: 10px 20px;
   color: white;
   text-align: center;
@@ -214,7 +213,7 @@
 
 .text__gradient {
   background: linear-gradient(45deg, #3e88de 0%, #2b6ebb 100%);
-  -webkit-background-clip: text; /* For Safari/WebKit browsers */
+  -webkit-background-clip: text;
   color: transparent;
 }
 
@@ -229,13 +228,17 @@
 }
 
 .nav__btn:hover {
-  background: linear-gradient(-90deg, #2b6ebb47, #1a1a1a);
+  background: linear-gradient(-90deg, #2b6ebb47, #1a1a1a00);
 }
 
 .nav__btn__no__hover {
-  background: linear-gradient(-90deg, #2b6ebb, #1a1a1a);
+  background: linear-gradient(-90deg, #2b6ebb, #1a1a1a00);
 }
 
 .season__btn {
   background: #383838;
+}
+
+.bg__gradient {
+  background: linear-gradient(45deg, #1c1d22 0%, #141417 100%);
 }

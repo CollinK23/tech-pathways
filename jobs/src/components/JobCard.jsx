@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const JobCard = ({ stats }) => {
   return (
-    <div className="w-[350px] bg-primary rounded-md shadow">
+    <div className="w-[350px] h-[225px] bg-primary rounded-md shadow relative bg__gradient border border-secondary">
       <div className="p-4">
-        <div className="flex justify-between items-center">
-          <div className="font-bold text-[20px] text-white">{stats.role}</div>
+        <div className="flex justify-between">
+          <div className="font-bold text-[100%] text-white">{stats.role}</div>
           <div className="text-right text-white text-[12px] bg-grey rounded-md py-1 px-2">
             {stats.season}
           </div>
@@ -15,7 +15,7 @@ const JobCard = ({ stats }) => {
           {stats.company}
         </div>
         <div className="text-[14px] text-gray-400">{stats.location}</div>
-        <div className="mt-10 space-x-2 flex justify-end">
+        <div className="w-[100%] absolute bottom-0 pb-6 space-x-2">
           <Link
             to={stats.applicationLink}
             target="_blank"

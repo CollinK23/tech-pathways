@@ -82,6 +82,34 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.put("/:id", async (req, res) => {
+  try {
+    const appId = req.params.id;
+
+    const updatedApp = await JobApp.findOneAndReplace(
+      { _id: appId },
+      req.body,
+      { new: true }
+    );
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.delete("/:id", async (req, res) => {
+  try {
+    const appId = req.params.id;
+
+    const deletedApp = await JobApp.findByIdAndRemove(appId);
+
+    res.status();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.delete;
+
 app.post("/getUser", async (req, res) => {
   try {
     const { name, email, avatar } = req.body;
@@ -103,6 +131,70 @@ app.post("/getUser", async (req, res) => {
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(500).json({ error: "An error occurred while saving the user." });
+  }
+});
+
+app.get("/:season/jobs", async (req, res) => {
+  const season = req.params.season;
+  const page = parseInt(req.query.page) || 0;
+  const pageSize = 8;
+  const searchName = req.query.searchName || "";
+
+  try {
+    const query = {};
+
+    if (searchName) {
+      query.$or = [
+        { jobTitle: { $regex: new RegExp(searchName, "i") } },
+        { company: { $regex: new RegExp(searchName, "i") } },
+        { location: { $regex: new RegExp(searchName, "i") } },
+      ];
+    }
+
+    let jobApps;
+
+    if (season === "summer") {
+      jobApps = await SummerJob.find(query)
+        .sort({ datePosted: -1 })
+        .skip(page * pageSize)
+        .limit(pageSize);
+    } else if (season === "offseason") {
+      jobApps = await OffseasonJob.find(query)
+        .sort({ datePosted: -1 })
+        .skip(page * pageSize)
+        .limit(pageSize);
+    } else if (season === "newgrad") {
+      jobApps = await NewGradJob.find(query)
+        .skip(page * pageSize)
+        .limit(pageSize);
+    } else {
+      return res.status(400).json({ message: "Invalid season parameter" });
+    }
+
+    console.log(searchName);
+    res.status(200).json(jobApps);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+});
+
+app.get("/recent", async (req, res) => {
+  try {
+    const jobs = [SummerJob, OffseasonJob, NewGradJob];
+    const recentJobs = {};
+
+    for (const jobModel of jobs) {
+      const jobDocuments = await jobModel
+        .find()
+        .sort({ datePosted: -1 })
+        .limit(3);
+      recentJobs[jobModel.modelName] = jobDocuments;
+    }
+
+    res.json(recentJobs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error getting jobs" });
   }
 });
 

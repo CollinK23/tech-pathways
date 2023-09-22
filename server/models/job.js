@@ -5,7 +5,7 @@ const summerJobSchema = mongoose.Schema({
   role: String,
   location: String,
   applicationLink: String,
-  datePosted: String,
+  datePosted: Date,
   salary: String,
   season: String,
 });
@@ -15,7 +15,7 @@ const offseasonJobSchema = mongoose.Schema({
   role: String,
   location: String,
   applicationLink: String,
-  datePosted: String,
+  datePosted: Date,
   salary: String,
   season: String,
 });
@@ -25,7 +25,7 @@ const newGradJobSchema = mongoose.Schema({
   role: String,
   location: String,
   applicationLink: String,
-  datePosted: String,
+  datePosted: Date,
   salary: String,
   season: String,
 });

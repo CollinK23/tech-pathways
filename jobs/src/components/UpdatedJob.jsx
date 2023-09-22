@@ -26,8 +26,13 @@ const UpdatedJob = ({ stats, id }) => {
 
     dispatch(createApp(appData));
   };
+
+  const date = new Date(stats.datePosted);
+
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  const formattedDate = date.toLocaleDateString("en-US", options);
   return (
-    <div className="bg-primary w-full rounded-md p-4 flex items-center justify-between">
+    <div className="w-full rounded-md p-4 flex items-center justify-between bg__gradient border border-secondary rounded-md">
       <div className="flex flex-col">
         <div className="flex flex-col">
           <div className="font-bold text-[100%] text-white">{stats.role}</div>
@@ -41,7 +46,7 @@ const UpdatedJob = ({ stats, id }) => {
           </div>
           <div className="flex flex-row space-x-2 mt-2">
             <div className="text-white inline-block text-[12px] bg-grey rounded-md py-1 px-2">
-              {stats.datePosted}
+              {formattedDate}
             </div>
             <div className="text-white inline-block text-[12px] bg-grey rounded-md py-1 px-2">
               {stats.season}

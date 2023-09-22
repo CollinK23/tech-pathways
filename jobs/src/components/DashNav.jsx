@@ -56,8 +56,8 @@ const DashNav = ({ selected }) => {
       <div
         className={
           expanded
-            ? `bg-primary w-[250px] h-full fixed bottom-0`
-            : `bg-primary h-full fixed inline-block bottom-0`
+            ? `bg-primary w-[250px] h-full fixed bottom-0 bg__gradient border border-secondary`
+            : `bg-primary h-full fixed inline-block bottom-0 bg__gradient border border-secondary`
         }
       >
         <div className="w-[100%]  p-4">
@@ -70,6 +70,7 @@ const DashNav = ({ selected }) => {
         </div>
         <Link to="/dashboard">
           <div
+            title="Dashboard"
             className={
               selected == "Dashboard"
                 ? `w-[100%] text-white  text-[16px] p-2 cursor-pointer nav__btn__no__hover`
@@ -82,6 +83,7 @@ const DashNav = ({ selected }) => {
         </Link>
         <Link to="/internships">
           <div
+            title="Internships"
             className={
               selected == "Internships"
                 ? `w-[100%] text-white  text-[16px] p-2 cursor-pointer nav__btn__no__hover`
@@ -94,6 +96,7 @@ const DashNav = ({ selected }) => {
         </Link>
         <Link to="/applications">
           <div
+            title="Applications"
             className={
               selected == "Applications"
                 ? `w-[100%] text-white  text-[16px] p-2 cursor-pointer nav__btn__no__hover`
@@ -105,6 +108,7 @@ const DashNav = ({ selected }) => {
           </div>
         </Link>
         <div
+          title="Logout"
           className={`w-[100%] text-white  text-[16px] p-2 cursor-pointer nav__btn`}
           onClick={handleLogout}
         >
@@ -138,8 +142,8 @@ const DashNav = ({ selected }) => {
       <div
         className={
           expanded
-            ? "flex flex-row items-center space-x-2 rounded-md bg-primary w-[250px] bottom-0 p-4 fixed"
-            : "flex flex-row items-center space-x-2 rounded-md bg-primary w-[70px] bottom-0 p-4 fixed"
+            ? "flex flex-row items-center space-x-2 rounded-md  w-[250px] bottom-0 p-4 fixed"
+            : "flex flex-row items-center space-x-2 rounded-md  w-[70px] bottom-0 p-4 fixed"
         }
         onClick={() => setShowDropdown(!showDropdown)}
       >
