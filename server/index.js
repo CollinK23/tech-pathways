@@ -235,7 +235,7 @@ async function updateJobs(season, model) {
   }
 }
 
-const job = schedule.scheduleJob("*/30 * * * * ", async function () {
-  await updateJobs("Summer", SummerJob);
-  await updateJobs("Offseason", OffseasonJob);
-});
+// const job = schedule.scheduleJob("*/30 * * * * ", async function () {
+//   await updateJobs("Summer", SummerJob);
+//   await updateJobs("Offseason", OffseasonJob);
+// });

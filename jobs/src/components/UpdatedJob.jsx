@@ -32,7 +32,7 @@ const UpdatedJob = ({ stats, id }) => {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   const formattedDate = date.toLocaleDateString("en-US", options);
   return (
-    <div className="w-full rounded-md p-4 flex items-center justify-between bg__gradient border border-secondary rounded-md">
+    <div className="w-[100%] rounded-md p-4 flex sm:items-center justify-between bg__gradient border border-secondary rounded-md sm:flex-row flex-col sm:space-y-0 space-y-4">
       <div className="flex flex-col">
         <div className="flex flex-col">
           <div className="font-bold text-[100%] text-white">{stats.role}</div>

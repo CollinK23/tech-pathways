@@ -20,18 +20,18 @@ const Dashboard = () => {
   console.log(data);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex sm:flex-row">
       <div className="hidden sm:block">
         <DashNav selected={"Dashboard"}></DashNav>
       </div>
       <div className="mx-auto mt-12">
         <div className="text-white font-semibold text-[3em] mb-4">
-          Welcome Back
+          Dashboard{" "}
         </div>
         <div className="text-white font-medium text-[1.3em]">
           Recent Summer Internship Positions
         </div>
-        <div className="flex flex-wrap my-4 gap-4">
+        <div className="flex flex-wrap my-4 mb-8 gap-4">
           {data?.data.SummerJob.map((stats, index) => (
             <JobCard key={index} stats={stats} />
           ))}
@@ -39,7 +39,7 @@ const Dashboard = () => {
         <div className="text-white font-medium text-[1.3em]">
           Recent Offseason Internship Positions
         </div>
-        <div className="flex flex-wrap my-4 gap-4">
+        <div className="flex flex-wrap my-4 mb-8 gap-4">
           {data?.data.OffseasonJob.map((stats, index) => (
             <JobCard key={index} stats={stats} />
           ))}

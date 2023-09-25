@@ -91,7 +91,7 @@ const DashNav = ({ selected }) => {
             }
           >
             <i className="fa-solid fa-suitcase m-4"></i>
-            {expanded ? "Internships" : ""}
+            {expanded ? "Find Jobs" : ""}
           </div>
         </Link>
         <Link to="/applications">
@@ -104,7 +104,7 @@ const DashNav = ({ selected }) => {
             }
           >
             <i className="fa-solid fa-clock-rotate-left fa-flip-horizontal m-4"></i>
-            {expanded ? "Applications" : ""}
+            {expanded ? "My Applications" : ""}
           </div>
         </Link>
         <div

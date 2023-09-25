@@ -44,11 +44,13 @@ const Jobs = () => {
   };
 
   return (
-    <div className="flex flex-row">
-      <DashNav selected={"Internships"}></DashNav>
-      <div className="mx-auto mt-12 p-12 w-[1300px]">
+    <div className="flex sm:flex-row">
+      <div className="hidden sm:block">
+        <DashNav selected={"Internships"}></DashNav>
+      </div>
+      <div className="mx-auto mt-12 sm:p-12 p-8 w-[1300px]">
         <div className="text-white font-semibold text-[3em] mb-4">
-          Search For Internships
+          Search For Jobs
         </div>
         <form action="/search" method="get">
           <input
