@@ -24,6 +24,12 @@ const Newgrad = () => {
     return match ? match[1] : text;
   };
 
+  const extractTextBetweenParentheses = (text) => {
+    const regex = /\((https:\/\/[^\)]+)\)/;
+    const match = regex.exec(text);
+    return match ? match[1] : text;
+  };
+
   const fetchData = async () => {
     try {
       const response = await fetch(import.meta.env.VITE_NEWGRAD);
@@ -43,17 +49,28 @@ const Newgrad = () => {
         const rolesRaw = match[4].trim();
         const roles = rolesRaw.split("<br>").map((role) => role.trim());
         const datePosted = fixDate(match[6].trim());
-        const applicationLink = match[4].trim();
+
         const location = match[3].trim();
+        const salary = "0";
+
+        if (match[6] == "-") {
+          break;
+        }
 
         roles.forEach((role) => {
-          internshipData.push({
-            company: extractTextBetweenBrackets(companyName),
-            role: extractTextBetweenBrackets(role),
-            location: location,
-            applicationLink: applicationLink,
-            datePosted: datePosted,
-          });
+          const applicationLink = extractTextBetweenParentheses(role);
+          const roleFixed = extractTextBetweenBrackets(role);
+
+          if (applicationLink[0] === "h" && roleFixed !== "Closed") {
+            internshipData.push({
+              company: extractTextBetweenBrackets(companyName),
+              role: roleFixed,
+              location: location,
+              applicationLink,
+              datePosted: datePosted,
+              salary: salary,
+            });
+          }
         });
       }
       setInitialData(internshipData);

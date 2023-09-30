@@ -10,11 +10,11 @@ const ProgressBar = ({ checkpoints }) => {
   );
 
   return (
-    <div className="flex sm:space-x-12 space-x-8">
+    <div className="flex sm:space-x-12 space-x-4">
       {checkpoints.map((checkpoint, index) => (
-        <div key={index} className="flex flex-col items-center w-[50px]">
+        <div key={index} className="flex flex-col items-center">
           <div
-            className={`w-8 h-8 rounded-full mb-1 ${
+            className={`sm:w-8 sm:h-8 w-7 h-7 rounded-full mb-1 ${
               rejectedHasDate
                 ? "bg-red"
                 : offerHasDate
@@ -26,8 +26,10 @@ const ProgressBar = ({ checkpoints }) => {
                 : "bg-grey"
             }`}
           />
-          <div className="text-xs text-white">{checkpoint.name}</div>
-          <div className="text-xs text-gray-400">
+          <div className="sm:w-[70px] sm:text-xs text-[11px] text-white text-center">
+            {checkpoint.name}
+          </div>
+          <div className="sm:w-[70px] sm:text-xs text-[10px] text-gray-400 text-center">
             {checkpoint.date
               ? new Date(checkpoint.date).toLocaleDateString()
               : "-"}

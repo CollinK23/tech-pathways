@@ -21,7 +21,6 @@ export const createApp = (post) => async (dispatch) => {
 export const getUser = (user) => async (dispatch) => {
   try {
     const { data } = await api.getUser(user);
-    console.log(data);
     dispatch({ type: "AUTH", payload: data });
   } catch (error) {
     console.log(error);

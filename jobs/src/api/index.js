@@ -11,9 +11,11 @@ export const fetchApps = (userId, page, searchName) =>
     )}`
   );
 
-export const fetchJobs = (season, page, searchName) =>
+export const fetchJobs = (season, page, searchName, sortBy) =>
   axiosInstance.get(
-    `${season}/jobs?page=${page}&searchName=${encodeURIComponent(searchName)}`
+    `${season}/jobs/${sortBy}?page=${page}&searchName=${encodeURIComponent(
+      searchName
+    )}`
   );
 
 export const createApp = (newApp) => axiosInstance.post("/", newApp);

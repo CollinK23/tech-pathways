@@ -6,7 +6,7 @@ import JobApp from "./models/jobApp.js";
 import dotenv from "dotenv";
 import userModel from "./models/user.js";
 import schedule from "node-schedule";
-import { fetchInternships } from "./constants/getData.js";
+import { fetchInternships, fetchNewGrad } from "./constants/getData.js";
 import { SummerJob, OffseasonJob, NewGradJob } from "./models/job.js";
 
 dotenv.config();
@@ -108,8 +108,6 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-app.delete;
-
 app.post("/getUser", async (req, res) => {
   try {
     const { name, email, avatar } = req.body;
@@ -134,18 +132,19 @@ app.post("/getUser", async (req, res) => {
   }
 });
 
-app.get("/:season/jobs", async (req, res) => {
+app.get("/:season/jobs/:sort?", async (req, res) => {
   const season = req.params.season;
   const page = parseInt(req.query.page) || 0;
   const pageSize = 8;
   const searchName = req.query.searchName || "";
+  const sortParam = req.params.sort || "recent";
 
   try {
     const query = {};
 
     if (searchName) {
       query.$or = [
-        { jobTitle: { $regex: new RegExp(searchName, "i") } },
+        { role: { $regex: new RegExp(searchName, "i") } },
         { company: { $regex: new RegExp(searchName, "i") } },
         { location: { $regex: new RegExp(searchName, "i") } },
       ];
@@ -153,25 +152,28 @@ app.get("/:season/jobs", async (req, res) => {
 
     let jobApps;
 
+    const sortCriteria =
+      sortParam === "oldest" ? { datePosted: 1 } : { datePosted: -1 };
+
     if (season === "summer") {
       jobApps = await SummerJob.find(query)
-        .sort({ datePosted: -1 })
+        .sort(sortCriteria)
         .skip(page * pageSize)
         .limit(pageSize);
     } else if (season === "offseason") {
       jobApps = await OffseasonJob.find(query)
-        .sort({ datePosted: -1 })
+        .sort(sortCriteria)
         .skip(page * pageSize)
         .limit(pageSize);
     } else if (season === "newgrad") {
       jobApps = await NewGradJob.find(query)
+        .sort(sortCriteria)
         .skip(page * pageSize)
         .limit(pageSize);
     } else {
       return res.status(400).json({ message: "Invalid season parameter" });
     }
 
-    console.log(searchName);
     res.status(200).json(jobApps);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -235,7 +237,20 @@ async function updateJobs(season, model) {
   }
 }
 
-// const job = schedule.scheduleJob("*/30 * * * * ", async function () {
-//   await updateJobs("Summer", SummerJob);
-//   await updateJobs("Offseason", OffseasonJob);
-// });
+async function updateNewGrad() {
+  const data = await fetchNewGrad();
+  let isAdded = true;
+  for (let i = 0; i < data.length; i++) {
+    isAdded = await addJobToDatabase(data[i], NewGradJob);
+
+    if (!isAdded) {
+      break;
+    }
+  }
+}
+
+const job = schedule.scheduleJob("*/30 * * * * ", async function () {
+  await updateJobs("Summer", SummerJob);
+  await updateJobs("Offseason", OffseasonJob);
+  await updateNewGrad();
+});

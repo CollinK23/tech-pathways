@@ -17,41 +17,34 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(data);
-
   return (
-    <div className="flex sm:flex-row">
-      <div className="hidden sm:block">
-        <DashNav selected={"Dashboard"}></DashNav>
+    <div className="mx-auto mt-12 sm:p-12 p-6 pt-24 sm:pt-12">
+      <div className="w-[100%] text-white font-semibold text-[64px] mb-4">
+        Dashboard
       </div>
-      <div className="mx-auto mt-12">
-        <div className="text-white font-semibold text-[3em] mb-4">
-          Dashboard{" "}
-        </div>
-        <div className="text-white font-medium text-[1.3em]">
-          Recent Summer Internship Positions
-        </div>
-        <div className="flex flex-wrap my-4 mb-8 gap-4">
-          {data?.data.SummerJob.map((stats, index) => (
-            <JobCard key={index} stats={stats} />
-          ))}
-        </div>
-        <div className="text-white font-medium text-[1.3em]">
-          Recent Offseason Internship Positions
-        </div>
-        <div className="flex flex-wrap my-4 mb-8 gap-4">
-          {data?.data.OffseasonJob.map((stats, index) => (
-            <JobCard key={index} stats={stats} />
-          ))}
-        </div>
-        <div className="text-white font-medium text-[1.3em] mt-12">
-          Recent New Grad Positions
-        </div>
-        <div className="flex flex-wrap my-4 gap-4">
-          {data?.data.NewGradJob.map((stats, index) => (
-            <JobCard key={index} stats={stats} />
-          ))}
-        </div>
+      <div className="text-white font-medium text-[24px]">
+        Recent Summer Internship Positions
+      </div>
+      <div className="flex flex-wrap my-4 mb-8 gap-4 w-[100%]">
+        {data?.data.SummerJob.map((stats, index) => (
+          <JobCard key={index} stats={stats} />
+        ))}
+      </div>
+      <div className="text-white font-medium text-[24px]">
+        Recent Offseason Internship Positions
+      </div>
+      <div className="flex flex-wrap my-4 mb-8 gap-4">
+        {data?.data.OffseasonJob.map((stats, index) => (
+          <JobCard key={index} stats={stats} />
+        ))}
+      </div>
+      <div className="text-white font-medium text-[24px] mt-12">
+        Recent New Grad Positions
+      </div>
+      <div className="flex flex-wrap my-4 gap-4">
+        {data?.data.NewGradJob.map((stats, index) => (
+          <JobCard key={index} stats={stats} />
+        ))}
       </div>
     </div>
   );

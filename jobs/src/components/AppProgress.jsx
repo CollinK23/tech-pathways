@@ -102,7 +102,7 @@ const AppProgress = ({ stats, id }) => {
   return (
     <div>
       {!isDeleted ? (
-        <div className="bg-primary w-full rounded-md bg__gradient border border-secondary rounded-md">
+        <div className="bg-primary w-[100%] rounded-md bg__gradient border border-secondary rounded-md">
           <div className="relative flex sm:flex-row flex-col items-center justify-between p-4 sm:space-x-8 sm:space-y-0 space-y-4">
             <div className="flex flex-col w-[100%] sm:mb-0 mb-4">
               <div className="font-bold text-[16px] text-white">
@@ -120,7 +120,7 @@ const AppProgress = ({ stats, id }) => {
             <ProgressBar checkpoints={checkpoints} stats={stats} />
             {open ? (
               <i
-                className="absolute sm:relative top-0 right-0 px-4 fa-solid fa-x text-gray-400 text-[16px] cursor-pointer"
+                className="absolute sm:relative top-0 right-0 px-4 fa-solid fa-xmark text-gray-400 text-[16px] cursor-pointer"
                 onClick={() => setOpen(!open)}
               ></i>
             ) : (
@@ -141,11 +141,21 @@ const AppProgress = ({ stats, id }) => {
                       value={updateStatus}
                       onChange={handleStatusChange}
                     >
-                      <option value="applied">Applied</option>
-                      <option value="screened">Screened</option>
-                      <option value="interview">Interview</option>
-                      <option value="offer">Offer</option>
-                      <option value="reject">Reject</option>
+                      <option value="applied" className="bg-primary">
+                        Applied
+                      </option>
+                      <option value="screened" className="bg-primary">
+                        Screened
+                      </option>
+                      <option value="interview" className="bg-primary">
+                        Interview
+                      </option>
+                      <option value="offer" className="bg-primary">
+                        Offer
+                      </option>
+                      <option value="reject" className="bg-primary">
+                        Reject
+                      </option>
                     </select>
                   </div>
                   <div className="flex flex-col flex-grow">

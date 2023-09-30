@@ -80,3 +80,9 @@ export const extractLocation = (text) => {
   const result = removedTags.replace(regexTags, "");
   return result;
 };
+
+export const extractTextBetweenParentheses = (text) => {
+  const regex = /\((https:\/\/[^\)]+)\)/;
+  const match = regex.exec(text);
+  return match ? match[1] : text;
+};

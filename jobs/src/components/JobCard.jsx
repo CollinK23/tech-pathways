@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const JobCard = ({ stats }) => {
   return (
-    <div className="w-[350px] h-[250px] bg-primary rounded-md shadow relative bg__gradient border border-secondary">
+    <div className="block sm:w-[350px] w-[100%] h-[250px] bg-primary rounded-md shadow relative bg__gradient border border-secondary z-0">
       <div className="p-4">
         <div className="font-bold text-[100%] text-white">{stats.role}</div>
         <div className="font-medium text-[16px] text-white">
