@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Job from "./Job";
 import {
-  software,
-  dataAnalyst,
-  software2023,
-  dataScientist,
+  softwareIntern,
+  dataAnalystIntern,
+  software2023Intern,
+  dataScientistIntern,
 } from "../constants/salary";
 
 const Newgrad = () => {

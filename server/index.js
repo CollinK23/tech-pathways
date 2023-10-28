@@ -190,7 +190,13 @@ app.get("/recent", async (req, res) => {
         .find()
         .sort({ datePosted: -1 })
         .limit(3);
-      recentJobs[jobModel.modelName] = jobDocuments;
+
+      const documentCount = await jobModel.countDocuments({});
+
+      recentJobs[jobModel.modelName] = {
+        documents: jobDocuments,
+        count: documentCount,
+      };
     }
 
     res.json(recentJobs);

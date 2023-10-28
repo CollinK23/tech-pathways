@@ -44,16 +44,16 @@ const DashNav = ({ selected }) => {
           <div
             className={
               expanded
-                ? `bg-darkGrey sm:bg-primary w-[250px] h-full fixed bottom-0 sm:bg__gradient border border-secondary`
-                : `bg-primary h-full fixed inline-block bottom-0 sm:bg__gradient border border-secondary`
+                ? `bg-darkGrey  w-[250px] h-full fixed bottom-0`
+                : `bg-darkGrey h-full fixed inline-block bottom-0`
             }
           >
-            <div className="w-[100%]  p-4 pt-16 sm:pt-4">
+            <div className="w-[100%]  p-4 sm:pt-4 pt-8">
               <div className="font-semibold text-white text-[1.3em]">
-                <div className="flex flex-row">
+                <Link to="/" className="flex flex-row">
                   <img src={logo} className="w-[30px] mr-2"></img>
                   {expanded ? "TechPathways" : ""}
-                </div>
+                </Link>
               </div>
             </div>
             <Link to="/dashboard">
@@ -145,15 +145,15 @@ const DashNav = ({ selected }) => {
             ) : null}
           </div>
         </div>
-        <div className="sm:hidden fixed bg-primary w-full h-[100px]  bg__gradient border border-secondary">
+        <div className="sm:hidden absolute w-full h-[100px] ">
           {expanded ? (
             <i
-              className=" fixed left-0 fa-solid fa-xmark text-white text-[32px] p-8"
+              className=" fixed right-0 fa-solid fa-xmark text-white text-[32px] p-8"
               onClick={toggleExpanded}
             ></i>
           ) : (
             <i
-              className="fixed left-0 fa-solid fa-bars text-white text-[32px] p-8"
+              className="absolute left- fa-solid fa-bars text-white text-[32px] p-8"
               onClick={toggleExpanded}
             ></i>
           )}

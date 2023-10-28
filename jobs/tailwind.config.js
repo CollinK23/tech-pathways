@@ -5,13 +5,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#1f1f22",
-        secondary: "#292930",
+        primary: "#f4f4fb",
+        secondary: "#e1e6eb",
         blue: "#267dff",
         dimWhite: "#1a1a1a",
         dimBlue: "rgba(9, 151, 124, 0.1)",
-        grey: "#282930",
-        red: "#ff6676",
+        grey: "#43474c",
+        red: "#d00000",
+        pink: "#5c57b7",
         darkGrey: "#131315",
       },
       fontFamily: {

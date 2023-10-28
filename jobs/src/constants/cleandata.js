@@ -1,4 +1,9 @@
-import { software, dataAnalyst, software2023, dataScientist } from "./salary";
+import {
+  softwareIntern,
+  dataAnalystIntern,
+  software2023Intern,
+  dataScientistIntern,
+} from "./salary";
 
 export const fixDate = (text) => {
   let result = text;
@@ -17,25 +22,25 @@ export const extractTextBetweenBrackets = (text) => {
 export const findSalaryByCompanyName = (companyName, role) => {
   companyName = companyName.toLowerCase();
   if (
-    (typeof software[0][companyName] === "number") &
+    (typeof softwareIntern[0][companyName] === "number") &
     role.toLowerCase().includes("software")
   ) {
-    return `${software[0][companyName].toFixed(2)}`;
+    return `${softwareIntern[0][companyName].toFixed(2)}`;
   } else if (
-    (typeof dataAnalyst[0][companyName] === "number") &
+    (typeof dataAnalystIntern[0][companyName] === "number") &
     role.toLowerCase().includes("analyst")
   ) {
-    return `${dataAnalyst[0][companyName].toFixed(2)}`;
+    return `${dataAnalystIntern[0][companyName].toFixed(2)}`;
   } else if (
-    (typeof dataScientist[0][companyName] === "number") &
+    (typeof dataScientistIntern[0][companyName] === "number") &
     role.toLowerCase().includes("scien")
   ) {
-    return `${dataScientist[0][companyName].toFixed(2)}`;
+    return `${dataScientistIntern[0][companyName].toFixed(2)}`;
   } else if (
-    (typeof software2023[0][companyName] === "number") &
+    (typeof software2023Intern[0][companyName] === "number") &
     role.toLowerCase().includes("software")
   ) {
-    return `${software2023[0][companyName].toFixed(2)}`;
+    return `${software2023Intern[0][companyName].toFixed(2)}`;
   } else {
     return "N/A";
   }

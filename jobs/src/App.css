@@ -8,7 +8,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #121212;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  background-image: linear-gradient(180deg, #ffffff, #eef0f4f7 50%, #eef0f4),
+    url(https://assets.website-files.com/63f5d36e1bfb159570f6408c/63feed1d49df0b0ba2f037d8_Grid.svg);
+
+  background-position: 0, 0, 50%;
+  background-size: auto, auto;
 }
 
 .logo {

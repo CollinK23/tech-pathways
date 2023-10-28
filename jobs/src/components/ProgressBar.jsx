@@ -19,17 +19,17 @@ const ProgressBar = ({ checkpoints }) => {
                 ? "bg-red"
                 : offerHasDate
                 ? index < 4
-                  ? "bg-green-400"
+                  ? "bg-green-500"
                   : "bg-grey"
                 : checkpoint.date
-                ? "bg-blue"
+                ? "bg-pink"
                 : "bg-grey"
             }`}
           />
-          <div className="sm:w-[70px] sm:text-xs text-[11px] text-white text-center">
+          <div className="sm:w-[70px] sm:text-xs text-[11px] text-darkGrey font-semibold text-center">
             {checkpoint.name}
           </div>
-          <div className="sm:w-[70px] sm:text-xs text-[10px] text-gray-400 text-center">
+          <div className="sm:w-[70px] sm:text-xs text-[10px] text-grey text-center">
             {checkpoint.date
               ? new Date(checkpoint.date).toLocaleDateString()
               : "-"}

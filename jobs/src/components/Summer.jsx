@@ -110,13 +110,13 @@ const Summer = () => {
             <input
               type="text"
               placeholder="Search For Roles, Companies, Locations"
-              className="max-w-[800px] w-[100%] h-[48px] bg-primary m-8 px-4 shadow outline-none"
+              className="max-w-[800px] w-[100%] h-[48px] bg-primary m-8 px-4  outline-none"
               value={searchName}
               onChange={(e) => setSearchName(e.target.value)}
             ></input>
           </form>
           <div className="mb-4">
-            <table className="w-[1300px] shadow">
+            <table className="w-[1300px] ">
               <thead>
                 <tr className="text-left text-[16px] text-white bg-grey">
                   <th className="p-4">Company</th>

@@ -53,23 +53,24 @@ const Jobs = () => {
 
   return (
     <div className="mx-auto mt-12 sm:p-12 p-6 pt-24 sm:pt-12 w-[100%]">
-      <div className="text-white font-semibold text-[3em] mb-4">
+      {/* <div className="glow2 hidden sm:flex"></div> */}
+      <div className=" text-darkGrey font-semibold sm:text-[64px] text-[48px] mb-4 sub__text">
         Search For Jobs
       </div>
       <form action="/search" method="get">
         <input
           type="text"
           placeholder="Search For Roles, Companies, Locations"
-          className="w-[100%] h-[48px] bg-primary px-4 shadow outline-none text-white bg__gradient border border-secondary rounded-md"
+          className="w-[100%] h-[48px] bg-white px-4 outline-none text-darkGrey border border-secondary rounded-md"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
         ></input>
       </form>
       <div className="flex flex-row gap-4 my-4 w-[100%]">
-        <div className="relative w-1/2">
-          <label className="text-white">Sort by:</label>
+        <div className="w-[50%]">
+          <label className="text-darkGrey font-semibold">Sort by:</label>
           <select
-            className="block mt-1 bg-primary p-4 outline-none text-white shadow w-full bg__gradient border border-secondary rounded-md"
+            className="block mt-1 bg-white p-4 outline-none text-darkGrey w-full border border-secondary rounded-md"
             value={sortBy}
             onChange={handleSortChange}
           >
@@ -81,10 +82,10 @@ const Jobs = () => {
             </option>
           </select>
         </div>
-        <div className="relative w-1/2">
-          <label className="text-white">Job Type:</label>
+        <div className="w-[50%]">
+          <label className="text-darkGrey font-semibold">Job Type:</label>
           <select
-            className="block mt-1 bg-primary p-4 outline-none text-white shadow w-full bg__gradient border border-secondary rounded-md"
+            className="block mt-1 bg-white p-4 outline-none text-darkGrey w-full border border-secondary rounded-md"
             value={season}
             onChange={handleFilterChange}
           >
@@ -113,7 +114,7 @@ const Jobs = () => {
               disabled={!hasNextPage || isFetchingNextPage}
               className="rounded-md btn__gradient2 text-[14px]"
             >
-              {isFetchingNextPage ? "Loading More..." : "Nothing more to load"}
+              {isFetchingNextPage ? "Loading More..." : "Load More"}
             </button>
           </div>
         )}

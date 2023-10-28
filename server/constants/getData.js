@@ -37,7 +37,7 @@ export const fetchInternships = async (season) => {
       const datePosted = convertDateFormat(fixDate(match[5].trim()));
       const salary = findSalaryByCompanyName(company, role);
 
-      if (company === "") {
+      if (company === "↳") {
         company = prevName;
       }
 
