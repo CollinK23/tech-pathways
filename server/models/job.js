@@ -26,7 +26,6 @@ const newGradJobSchema = mongoose.Schema({
   location: String,
   applicationLink: String,
   datePosted: Date,
-  salary: String,
   season: String,
 });
 

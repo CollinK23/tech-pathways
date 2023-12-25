@@ -103,8 +103,8 @@ const AppProgress = ({ stats, id }) => {
     <div>
       {!isDeleted ? (
         <div className="bg-white w-[100%] rounded-md border border-secondary rounded-md">
-          <div className="relative flex sm:flex-row flex-col items-center justify-between p-4 sm:space-x-8 sm:space-y-0 space-y-4">
-            <div className="flex flex-col w-[100%] sm:mb-0 mb-4">
+          <div className="relative flex md:flex-row flex-col items-center justify-between p-4 md:space-x-8 md:space-y-0 space-y-4">
+            <div className="flex flex-col w-[100%] md:mb-0 mb-4">
               <div className="font-bold text-[16px] text-darkGrey">
                 {stats.jobTitle}
               </div>
@@ -133,7 +133,7 @@ const AppProgress = ({ stats, id }) => {
           {open ? (
             <div className="w-[100%] h-[100%] bg-primary p-4 ">
               <div className="space-y-8">
-                <div className="flex sm:flex-row flex-col sm:space-x-4 sm:space-y-0 space-y-4">
+                <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4">
                   <div className="flex flex-col flex-grow">
                     <label className="text-darkGrey pb-2 font-semibold">
                       Update Status:
@@ -175,14 +175,14 @@ const AppProgress = ({ stats, id }) => {
                 <div className="flex flex-wrap justify-end space-x-4">
                   <button
                     type="button"
-                    className="sm:px-16 rounded-md btn__gradient text-[14px]"
+                    className="md:px-16 rounded-md btn__gradient text-[14px]"
                     onClick={handleUpdateApp}
                   >
                     Update
                   </button>
                   <button
                     type="button"
-                    className="sm:px-16 rounded-md white__btn text-[14px]"
+                    className="md:px-16 rounded-md white__btn text-[14px]"
                     onClick={handleDeleteApp}
                   >
                     Delete

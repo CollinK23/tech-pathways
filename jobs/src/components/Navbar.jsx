@@ -60,37 +60,31 @@ const Navbar = () => {
         <div className="font-bold text-darkGrey text-[1.7em]">
           <Link to="/" className="flex flex-row items-center">
             <img src={logo} className="w-[45px] mr-2" alt="Logo" />
-            <div className="hidden sm:block">TechPathways</div>
+            <div className="hidden md:block">TechPathways</div>
           </Link>
-        </div>
-
-        <div className="sm:block hidden sm:flex sm:flex-row items-center text-darkGrey space-x-8 font-semibold">
-          <Link to="/summer" className="nav__text">
-            Summer
-          </Link>
-          <Link to="/offseason" className="nav__text">
-            Offseason
-          </Link>
-          <Link to="/newgrad" className="nav__text">
-            New Grad
-          </Link>
-          {user && (
-            <a href="/dashboard" className="nav__text">
-              Dashboard
-            </a>
-          )}
         </div>
         {user && (
-          <div
-            className="sm:inline-flex hidden flex flex-row items-center space-x-2 btn__gradient2 rounded-md cursor-pointer"
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            <img
-              className="w-[30px] h-[30px] object-cover rounded-full"
-              src={user.avatar}
-              alt={user.name}
-            />
-            <div className="text-white font-medium">{user.name}</div>
+          <div className="flex flex-row max-w-[1300px] space-x-2">
+            <a
+              className="sm:flex hidden flex-row items-center space-x-2 btn__gradient2 rounded-md cursor-pointer"
+              onClick={() => setShowDropdown(!showDropdown)}
+              href="/dashboard"
+            >
+              <img
+                className="w-[30px] h-[30px] object-cover rounded-full"
+                src={user.avatar}
+                alt={user.name}
+              />
+              <div className="md:block hidden text-white font-medium">
+                Dashboard
+              </div>
+            </a>
+            <a
+              className="sm:flex hidden flex-row items-center space-x-2 white__btn rounded-md cursor-pointer"
+              onClick={handleLogout}
+            >
+              <div className="md:block hidden font-medium">Log Out</div>
+            </a>
           </div>
         )}
         {!user && (
@@ -121,32 +115,19 @@ const Navbar = () => {
             toggle ? "active" : ""
           } transition-transform duration-300 ease-in-out transform`}
         >
-          <Link to="/summer" className="nav__text text-white">
-            Summer
-          </Link>
-          <Link to="/offseason" className="nav__text text-white">
-            Offseason
-          </Link>
-          <Link to="/newgrad" className="nav__text text-white">
-            New Grad
-          </Link>
           {user && (
-            <a href="/dashboard" className="nav__text text-white">
-              Dashboard
-            </a>
-          )}
-          {user && (
-            <div
+            <a
               className="flex flex-row items-center space-x-2 btn__gradient2 rounded-md cursor-pointer"
               onClick={() => setShowDropdown(!showDropdown)}
+              href="/dashboard"
             >
               <img
                 className="w-[30px] h-[30px] object-cover rounded-full"
                 src={user.avatar}
                 alt={user.name}
               />
-              <div className="text-white font-medium">{user.name}</div>
-            </div>
+              <div className="text-white font-medium">Dashboard</div>
+            </a>
           )}
           {!user && (
             <GoogleLogin
@@ -157,17 +138,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-
-      {showDropdown && user && (
-        <div className="absolute top-[calc(100%+10px)] right-0 bg-white shadow-md rounded-md mt-2">
-          <button
-            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-            onClick={handleLogout}
-          >
-            Log Out
-          </button>
-        </div>
-      )}
     </nav>
   );
 };

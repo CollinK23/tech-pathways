@@ -35,7 +35,6 @@ export const fetchInternships = async (season) => {
       const location = extractLocation(match[3].trim());
       const applicationLink = match[4].trim();
       const datePosted = convertDateFormat(fixDate(match[5].trim()));
-      const salary = findSalaryByCompanyName(company, role);
 
       if (company === "↳") {
         company = prevName;
@@ -53,7 +52,6 @@ export const fetchInternships = async (season) => {
           location,
           applicationLink,
           datePosted,
-          salary,
           season,
         });
       }
@@ -85,7 +83,6 @@ export const fetchNewGrad = async () => {
       const datePosted = fixDate(match[6].trim());
 
       const location = match[3].trim();
-      const salary = "0";
       const season = "New Grad";
 
       if (match[6] == "-") {
@@ -103,7 +100,6 @@ export const fetchNewGrad = async () => {
             location: location,
             applicationLink,
             datePosted: datePosted,
-            salary,
             season,
           });
         }

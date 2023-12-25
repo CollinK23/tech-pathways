@@ -19,9 +19,6 @@ const Job = ({ job }) => {
         <div className="text-[14px] text-gray-500">{location}</div>
       </td>
       <td className="p-4 font-bold text-[16px]">{job.role}</td>
-      <td className="p-4 w-[200px]">
-        {job.salary === "N/A" ? "-" : `${job.salary} / Hr`}
-      </td>
       <td className="p-4">{job.datePosted}</td>
       <td className="p-4">
         <Link

@@ -8,7 +8,7 @@ module.exports = {
         primary: "#f4f4fb",
         secondary: "#e1e6eb",
         blue: "#267dff",
-        dimWhite: "#1a1a1a",
+        dimWhite: "#EFF4F8",
         dimBlue: "rgba(9, 151, 124, 0.1)",
         grey: "#43474c",
         red: "#d00000",

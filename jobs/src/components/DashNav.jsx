@@ -153,7 +153,7 @@ const DashNav = ({ selected }) => {
             ></i>
           ) : (
             <i
-              className="absolute left- fa-solid fa-bars text-white text-[32px] p-8"
+              className="absolute left-0 fa-solid fa-bars text-darkGrey text-[32px] p-8"
               onClick={toggleExpanded}
             ></i>
           )}

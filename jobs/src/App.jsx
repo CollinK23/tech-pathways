@@ -2,9 +2,6 @@ import { React, useEffect } from "react";
 import {
   Home,
   Navbar,
-  Summer,
-  Offseason,
-  Newgrad,
   Dashboard,
   Internships,
   Applications,
@@ -31,9 +28,6 @@ const App = () => {
         )}
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/summer" element={<Summer />} />
-          <Route path="/offseason" element={<Offseason />} />
-          <Route path="/newgrad" element={<Newgrad />} />
           <Route
             path="/dashboard"
             element={

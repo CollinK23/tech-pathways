@@ -2,7 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createApp } from "../actions/posts";
-import { findSalaryByCompanyName } from "../constants/cleandata";
+// import { findSalaryByCompanyName } from "../constants/cleandata";
 
 const UpdatedJob = ({ stats, id }) => {
   const appData = {
@@ -32,7 +32,7 @@ const UpdatedJob = ({ stats, id }) => {
   };
 
   const date = new Date(stats.datePosted);
-  const tc = findSalaryByCompanyName(stats.company, stats.role);
+  // const tc = findSalaryByCompanyName(stats.company, stats.role);
 
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   const formattedDate = date.toLocaleDateString("en-US", options);
@@ -58,11 +58,11 @@ const UpdatedJob = ({ stats, id }) => {
             <div className="text-grey inline-block text-[12px] bg-primary border border-secondary rounded-md py-1 px-2">
               {stats.season}
             </div>
-            {tc === "N/A" ? null : (
+            {/* {tc === "N/A" ? null : (
               <div className="text-grey inline-block text-[12px] bg-primary border border-secondary rounded-md py-1 px-2">
                 ${tc} / Hr
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

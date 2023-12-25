@@ -17,11 +17,6 @@ const JobCard = ({ stats }) => {
             <div className="text-grey inline-block text-[12px] bg-primary border border-secondary rounded-md py-1 px-2">
               {stats.season}
             </div>
-            {stats.salary === "N/A" ? null : (
-              <div className="text-grey inline-block text-[12px] bg-primary border border-secondary rounded-md py-1 px-2">
-                ${stats.salary} / Hr
-              </div>
-            )}
           </div>
         </div>
         <div className="flex space-x-2">

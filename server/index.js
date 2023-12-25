@@ -255,8 +255,12 @@ async function updateNewGrad() {
   }
 }
 
-const job = schedule.scheduleJob("*/30 * * * * ", async function () {
-  await updateJobs("Summer", SummerJob);
-  await updateJobs("Offseason", OffseasonJob);
-  await updateNewGrad();
-});
+// const job = schedule.scheduleJob("*/30 * * * * ", async function () {
+//   await updateJobs("Summer", SummerJob);
+//   await updateJobs("Offseason", OffseasonJob);
+//   await updateNewGrad();
+// });
+
+await updateJobs("Summer", SummerJob);
+await updateJobs("Offseason", OffseasonJob);
+await updateNewGrad();
